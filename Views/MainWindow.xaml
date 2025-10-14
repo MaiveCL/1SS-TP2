@@ -15,8 +15,10 @@
     <DockPanel LastChildFill="True">
 
         <Menu DockPanel.Dock="Top" Width="{Binding ElementName=win, Path=Width}">
-            <MenuItem Header="Configuration"
-          Command="{Binding CmdOuvrirConfig}"/>
+          <MenuItem Header="Configuration"
+            Command="{Binding CmdOuvrirConfig}"/>
+          <MenuItem Header="Statut Jeton"
+            Command="{Binding CmdOuvrirStatut}"/>
         </Menu>
         
         <Grid>

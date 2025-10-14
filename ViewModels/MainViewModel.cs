@@ -16,9 +16,12 @@ namespace TP2.ViewModels
     {
         public RelayCommand CmdOuvrirConfig { get; private set; }
 
+        public RelayCommand CmdOuvrirStatut { get; private set; }
+
         public MainViewModel()
         {
             CmdOuvrirConfig = new RelayCommand(OuvrirConfig, null);
+            CmdOuvrirStatut = new RelayCommand(OuvrirStatut, null);
         }
 
         private void OuvrirConfig(object? obj)
@@ -33,6 +36,20 @@ namespace TP2.ViewModels
             }
 
             configWindow.ShowDialog(); // fenêtre modale
+        }
+
+        private void OuvrirStatut(object? obj)
+        {
+            // Crée et ouvre la fenêtre ConfigWindow en modal
+            var statutWindow = new AccountStatusWindow();
+
+            // Optionnel : si tu veux centrer par rapport à la MainWindow
+            if (Application.Current.MainWindow != null)
+            {
+                statutWindow.Owner = Application.Current.MainWindow;
+            }
+
+            statutWindow.ShowDialog(); // fenêtre modale
         }
     }
 }

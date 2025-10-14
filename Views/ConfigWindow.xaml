@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TP2.Views"
         mc:Ignorable="d"
-        Title="ConfigWindow"
+        Title="Configuration du Jeton"
             Height="222" Width="333"
             WindowStartupLocation="CenterOwner"
             ResizeMode="NoResize">
