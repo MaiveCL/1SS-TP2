@@ -1,0 +1,14 @@
+﻿<!--API key : 9bc4f3c74c2c85ee16846fac7bca96d9-->
+    
+    <Window x:Class="TP2.Views.ConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TP2.Views"
+        mc:Ignorable="d"
+        Title="ConfigWindow" Height="450" Width="800">
+    <Grid>
+        
+    </Grid>
+</Window>
