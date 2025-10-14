@@ -4,9 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TP2"
+        xmlns:vm="clr-namespace:TP2.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
-    </Grid>
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <DockPanel LastChildFill="True">
+
+        <Menu DockPanel.Dock="Top" Width="{Binding ElementName=win, Path=Width}">
+            <MenuItem Header="Configuration"
+          Command="{Binding CmdOuvrirConfig}"/>
+        </Menu>
+        
+        <Grid>
+
+        </Grid>
+        
+    </DockPanel>
 </Window>

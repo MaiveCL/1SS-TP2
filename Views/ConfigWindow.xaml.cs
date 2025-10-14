@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TP2.ViewModels;
 
 namespace TP2.Views
 {
@@ -22,6 +23,16 @@ namespace TP2.Views
         public ConfigWindow()
         {
             InitializeComponent();
+
+            // Passe un delegate qui ferme la fenêtre
+            this.DataContext = new ConfigWindowViewModel(FermerFenetre);
+            // delegate qui appelle Close() sur la fenêtre.
+            // ConfigWindowViewModel reçoit ce delegate et le stocke dans _fermerFenetre du ConfigWindowViewModel.cs
+            // Avantage : le ViewModel n’a pas besoin de connaître directement la fenêtre, respectant le pattern MVVM.
+        }
+        private void FermerFenetre()
+        {
+            this.Close();
         }
     }
 }
