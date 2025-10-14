@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TP2.Properties; // Pour Settings.Default
 
 namespace TP2.Models
 {
@@ -21,6 +22,15 @@ namespace TP2.Models
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            // Ajouter le token si configuré
+            string token = Settings.Default.ApiToken;
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                // Format standard pour cette API : "Authorization: Bearer <token>"
+                _httpClient.DefaultRequestHeaders.Remove("Authorization");
+                _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            }
         }
 
         public void SetHttpRequestHeader(string header, string val)

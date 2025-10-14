@@ -65,21 +65,19 @@ namespace TP2.ViewModels
 
             try
             {
-                using ApiClient client = new ApiClient("https://api.detectlanguage.com/v2");
+                using ApiClient client = new ApiClient("https://ws.detectlanguage.com/0.2");
                 client.SetHttpRequestHeader("Authorization", "Bearer " + token);
 
-                string json = await client.RequeteGetAsync("/user");
+                string json = await client.RequeteGetAsync("/user/status");
 
-                JObject jsonObj = JObject.Parse(json);
-                JToken dataToken = jsonObj["data"];
-
-                if (dataToken == null)
+                if (token == null)
                 {
                     MessageErreur = "Réponse inattendue de l’API.";
                     return;
                 }
 
-                Statut = dataToken.ToObject<AccountStatus>() ?? new AccountStatus();
+                var reponse = JsonConvert.DeserializeObject<AccountStatusResponse>(json);
+                Statut = reponse?.Data ?? new AccountStatus();
             }
             catch (Exception ex)
             {
