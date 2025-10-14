@@ -14,52 +14,94 @@
         <vm:ConfigWindowViewModel /> Le XAML ne contient pas le DataContext ici, on le fait dans le code-behind pour passer le delegate.
     </Window.DataContext>-->
 
-    <Grid Margin="15">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <!-- Message / chargement -->
-        <TextBlock Text="{Binding Message}" Foreground="DarkRed"
-                   FontStyle="Italic" Grid.Row="0" Margin="0,0,0,10"/>
-
         <!-- Données -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <TextBlock Text="Plan :" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.Plan}" Grid.Row="0" Grid.Column="1"/>
+            <!-- Message / chargement -->
+            <TextBlock Text="{Binding Message}"
+                   Foreground="DarkRed"
+                   FontStyle="Italic"
+                   Grid.Row="0"
+                   Margin="0,0,0,10"/>
 
-            <TextBlock Text="Statut :" Grid.Row="1" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.Status}" Grid.Row="1" Grid.Column="1"/>
+            <!-- Données -->
+            <Grid Grid.Row="1" Margin="0,0,0,10">
 
-            <TextBlock Text="Requêtes (aujourd'hui) :" Grid.Row="2" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.Requests}" Grid.Row="2" Grid.Column="1"/>
+                <!-- Styles -->
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" x:Key="RightAlignLabel">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="TextAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="0,3"/>
+                    </Style>
 
-            <TextBlock Text="Octets (aujourd'hui) :" Grid.Row="3" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.Bytes}" Grid.Row="3" Grid.Column="1"/>
+                    <Style TargetType="TextBlock" x:Key="LeftAlignValue">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="TextAlignment" Value="Left"/>
+                        <Setter Property="Margin" Value="5,3"/>
+                    </Style>
+                </Grid.Resources>
 
-            <TextBlock Text="Limite quotidienne (requêtes) :" Grid.Row="4" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.DailyRequestsLimit}" Grid.Row="4" Grid.Column="1"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Limite quotidienne (octets) :" Grid.Row="5" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.DailyBytesLimit}" Grid.Row="5" Grid.Column="1"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <TextBlock Text="Date du rapport :" Grid.Row="6" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.Date}" Grid.Row="6" Grid.Column="1"/>
+                <!-- Ligne 1 -->
+                <TextBlock Text="Plan :" Grid.Row="0" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.Plan}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
-            <TextBlock Text="Expiration du plan :" Grid.Row="7" Grid.Column="0"/>
-            <TextBlock Text="{Binding Status.PlanExpires}" Grid.Row="7" Grid.Column="1"/>
-        </Grid>
+                <!-- Ligne 2 -->
+                <TextBlock Text="Statut :" Grid.Row="1" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.Status}" Grid.Row="1" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
-        <!-- Bouton Fermer -->
-        <Button Content="Fermer" Width="100" HorizontalAlignment="Right"
-                Margin="0,10,0,0" Grid.Row="2"
+                <!-- Ligne 3 -->
+                <TextBlock Text="Requêtes (aujourd'hui) :" Grid.Row="2" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.Requests}" Grid.Row="2" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+
+                <!-- Ligne 4 -->
+                <TextBlock Text="Octets (aujourd'hui) :" Grid.Row="3" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.Bytes}" Grid.Row="3" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+
+                <!-- Ligne 5 -->
+                <TextBlock Text="Limite quotidienne (requêtes) :" Grid.Row="4" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.DailyRequestsLimit}" Grid.Row="4" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+
+                <!-- Ligne 6 -->
+                <TextBlock Text="Limite quotidienne (octets) :" Grid.Row="5" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.DailyBytesLimit}" Grid.Row="5" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+
+                <!-- Ligne 7 -->
+                <TextBlock Text="Date du rapport :" Grid.Row="6" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.Date}" Grid.Row="6" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+
+                <!-- Ligne 8 -->
+                <TextBlock Text="Expiration du plan :" Grid.Row="7" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Status.PlanExpires}" Grid.Row="7" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+            </Grid>
+
+            <!-- Bouton Fermer -->
+            <Button Content="Fermer"
+                Width="100"
+                HorizontalAlignment="Right"
+                Margin="0,10,0,0"
+                Grid.Row="2"
                 Command="{Binding CmdFermer}"/>
-    </Grid>
+        </Grid>
 </Window>
