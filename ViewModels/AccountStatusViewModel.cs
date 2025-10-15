@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TP2.Models;
@@ -79,6 +80,31 @@ namespace TP2.ViewModels
                 if (string.IsNullOrWhiteSpace(json))
                 {
                     MessageErreur = "Aucune réponse de l’API.";
+
+                    MessageBox.Show(
+                        MessageErreur,
+                        "Message du programme",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+
+                    return;
+                }
+
+                if (json.Contains("\"error\""))
+                {
+                    var wrapper = JsonConvert.DeserializeObject<ApiErrorWrapper>(json);
+                    Statut = new AccountStatus();
+                    MessageErreur = $"Erreur {wrapper?.Error?.Code} : {wrapper?.Error?.Message}";
+
+                    // ajouter une alerte aussi
+                    MessageBox.Show(
+                        MessageErreur,
+                        "Message de votre API",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+
                     return;
                 }
 
