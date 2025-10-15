@@ -13,10 +13,11 @@ namespace TP2.Models
         public int Requests { get; set; }                // requêtes envoyées aujourd'hui
         public int Bytes { get; set; }                   // octets envoyés aujourd'hui
         public string Plan { get; set; }                 // ex: "FREE"
-        public string PlanExpires { get; set; }          // date d'expiration ou null
-        public int DailyRequestsLimit { get; set; }      // limite quotidienne de requêtes
-        public int DailyBytesLimit { get; set; }         // limite quotidienne en octets
+        public string Plan_expires { get; set; }          // date d'expiration ou null
+        public int Daily_requests_limit { get; set; }      // limite quotidienne de requêtes
+        public int Daily_bytes_limit { get; set; }         // limite quotidienne en octets
         public string Status { get; set; }               // "ACTIVE" ou "SUSPENDED"
+        public ApiError? Error { get; set; } = null;
     }
 
 }

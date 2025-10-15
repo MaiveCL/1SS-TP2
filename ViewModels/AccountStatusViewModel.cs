@@ -78,7 +78,7 @@ namespace TP2.ViewModels
 
                 if (string.IsNullOrWhiteSpace(json))
                 {
-                    MessageErreur = "Réponse vide ou inattendue de l’API.";
+                    MessageErreur = "Aucune réponse de l’API.";
                     return;
                 }
 

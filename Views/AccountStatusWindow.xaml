@@ -64,36 +64,36 @@
                 </Grid.RowDefinitions>
 
                 <!-- Ligne 1 -->
-                <TextBlock Text="Plan :" Grid.Row="0" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.Plan}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Plan :" Grid.Row="3" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Plan}" Grid.Row="3" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 2 -->
-                <TextBlock Text="Statut :" Grid.Row="1" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.Status}" Grid.Row="1" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Statut :" Grid.Row="7" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Status}" Grid.Row="7" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 3 -->
-                <TextBlock Text="Requêtes (aujourd'hui) :" Grid.Row="2" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.Requests}" Grid.Row="2" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Requêtes (aujourd'hui) :" Grid.Row="1" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Requests}" Grid.Row="1" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 4 -->
-                <TextBlock Text="Octets (aujourd'hui) :" Grid.Row="3" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.Bytes}" Grid.Row="3" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Octets (aujourd'hui) :" Grid.Row="2" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Bytes}" Grid.Row="2" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 5 -->
-                <TextBlock Text="Limite quotidienne (requêtes) :" Grid.Row="4" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.DailyRequestsLimit}" Grid.Row="4" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Limite quotidienne (requêtes) :" Grid.Row="5" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Daily_requests_limit}" Grid.Row="5" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 6 -->
-                <TextBlock Text="Limite quotidienne (octets) :" Grid.Row="5" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.DailyBytesLimit}" Grid.Row="5" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Limite quotidienne (octets) :" Grid.Row="6" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Daily_bytes_limit}" Grid.Row="6" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 7 -->
-                <TextBlock Text="Date du rapport :" Grid.Row="6" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.Date}" Grid.Row="6" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Date du rapport :" Grid.Row="0" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Date}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
 
                 <!-- Ligne 8 -->
-                <TextBlock Text="Expiration du plan :" Grid.Row="7" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
-                <TextBlock Text="{Binding Statut.PlanExpires}" Grid.Row="7" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
+                <TextBlock Text="Expiration du plan :" Grid.Row="4" Grid.Column="0" Style="{StaticResource RightAlignLabel}"/>
+                <TextBlock Text="{Binding Statut.Plan_expires}" Grid.Row="4" Grid.Column="1" Style="{StaticResource LeftAlignValue}"/>
             </Grid>
 
             <!-- Bouton Fermer -->
