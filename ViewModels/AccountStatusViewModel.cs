@@ -40,13 +40,19 @@ namespace TP2.ViewModels
             }
         }
 
-        public AccountStatusViewModel(Action fermerFenetre)
+        public AccountStatusViewModel(Action fermerFenetre, bool autoCharger = true)
         {
             _fermerFenetre = fermerFenetre;
             CmdFermer = new RelayCommand(OnFermer, null);
             CmdChargerStatut = new AsyncCommand(async _ => await ChargerStatutAsync(), null);
             Statut = new AccountStatus(); // Initialiser pour éviter les null refs
             MessageErreur = string.Empty;
+
+            if (autoCharger)
+            {
+                // Charger automatiquement le statut au démarrage
+                _ = ChargerStatutAsync();
+            }
         }
 
         private void OnFermer(object? obj) => _fermerFenetre?.Invoke();
@@ -70,14 +76,14 @@ namespace TP2.ViewModels
 
                 string json = await client.RequeteGetAsync("/user/status");
 
-                if (token == null)
+                if (string.IsNullOrWhiteSpace(json))
                 {
-                    MessageErreur = "Réponse inattendue de l’API.";
+                    MessageErreur = "Réponse vide ou inattendue de l’API.";
                     return;
                 }
 
-                var reponse = JsonConvert.DeserializeObject<AccountStatusResponse>(json);
-                Statut = reponse?.Data ?? new AccountStatus();
+                var reponse = JsonConvert.DeserializeObject<AccountStatus>(json);
+                Statut = reponse ?? new AccountStatus();
             }
             catch (Exception ex)
             {
