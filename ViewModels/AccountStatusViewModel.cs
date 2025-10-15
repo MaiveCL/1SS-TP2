@@ -16,7 +16,7 @@ namespace TP2.ViewModels
         private readonly Action _fermerFenetre;
 
         public RelayCommand CmdFermer { get; private set; }
-        public RelayCommand CmdChargerStatut { get; private set; }
+        public AsyncCommand CmdChargerStatut { get; private set; }
 
         private AccountStatus _statut;
         public AccountStatus Statut
@@ -44,7 +44,7 @@ namespace TP2.ViewModels
         {
             _fermerFenetre = fermerFenetre;
             CmdFermer = new RelayCommand(OnFermer, null);
-            CmdChargerStatut = new RelayCommand(async _ => await ChargerStatutAsync(), null);
+            CmdChargerStatut = new AsyncCommand(async _ => await ChargerStatutAsync(), null);
             Statut = new AccountStatus(); // Initialiser pour éviter les null refs
             MessageErreur = string.Empty;
         }
