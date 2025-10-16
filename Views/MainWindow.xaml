@@ -50,10 +50,10 @@
                           DisplayMemberPath="LangueComplete"/>
                 <TextBlock Margin="0,10,0,0">
                     <Run Text="Confiance : "/>
-                    <Run Text="{Binding DetectionSelectionnee.Confiance}"/>
+                    <Run Text="{Binding DetectionSelectionnee.Confiance, Mode=OneWay}"/>
                     <LineBreak/>
                     <Run Text="Est fiable : "/>
-                    <Run Text="{Binding DetectionSelectionnee.EstFiable}"/>
+                    <Run Text="{Binding DetectionSelectionnee.EstFiable, Mode=OneWay}"/>
                 </TextBlock>
             </StackPanel>
         </Grid>
