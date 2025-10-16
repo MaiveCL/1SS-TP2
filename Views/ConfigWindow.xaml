@@ -19,9 +19,9 @@
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- ComboBox Langue -->
+            
             <RowDefinition Height="Auto"/>
-            <!-- Checkbox -->
+            
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>

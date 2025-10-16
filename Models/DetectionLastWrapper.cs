@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TP2.Models
 {
-    public class Langue
+    public class DetectionLastWrapper
     {
-        public string Code { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
+        public List<DetectionResult> Detections { get; set; } = new();
     }
 }

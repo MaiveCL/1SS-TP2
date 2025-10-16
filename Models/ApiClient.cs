@@ -51,6 +51,12 @@ namespace TP2.Models
             HttpResponseMessage hrm = await _httpClient.PostAsync(_urlBaseApi + endpoint, donnees);
             return await hrm.Content.ReadAsStringAsync();
         }
+        public async Task<string> RequetePostFormUrlEncodedAsync(string endpoint, string formData)
+        {
+            var donnees = new StringContent(formData, Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpResponseMessage hrm = await _httpClient.PostAsync(_urlBaseApi + endpoint, donnees);
+            return await hrm.Content.ReadAsStringAsync();
+        }
 
         public void Dispose()
         {

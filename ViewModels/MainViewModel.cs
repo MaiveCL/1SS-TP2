@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32; // OpenFileDialog
+using Newtonsoft.Json;
 using TP2.Models;
+using TP2.Properties;
 using TP2.ViewModels.Commands;
 using TP2.Views; // pour ConfigWindow
 
@@ -31,7 +33,7 @@ namespace TP2.ViewModels
                 OnPropertyChanged(nameof(PeutDetecter));
             }
         }
-        public bool PeutDetecter => !string.IsNullOrWhiteSpace(TexteAAnalyser) && !string.IsNullOrEmpty(Properties.Settings.Default.ApiToken);
+        public bool PeutDetecter => !string.IsNullOrWhiteSpace(TexteAAnalyser);
         public ObservableCollection<DetectionResult> ResultatsDetection { get; set; } = new ObservableCollection<DetectionResult>();
 
         private DetectionResult? _detectionSelectionnee;
@@ -60,7 +62,6 @@ namespace TP2.ViewModels
             }
 
             configWindow.ShowDialog(); // fenêtre modale
-            OnPropertyChanged(nameof(PeutDetecter));
         }
 
         private void OuvrirStatut(object? obj)
@@ -76,5 +77,77 @@ namespace TP2.ViewModels
 
             statutWindow.ShowDialog(); // fenêtre modale
         }
+
+        private async Task DetecterLangueAsync()
+        {
+            ResultatsDetection.Clear();
+            DetectionSelectionnee = null;
+
+            string token = Settings.Default.ApiToken;
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                MessageBox.Show("Aucun jeton configuré.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                // Charger la liste des langues si nécessaire
+                await ListeLangues.Instance.ChargerAsync();
+
+                using var client = new ApiClient("https://ws.detectlanguage.com/0.2");
+                client.SetHttpRequestHeader("Authorization", "Bearer " + token);
+
+                // Préparer JSON simple pour l'envoi (form-urlencoded)
+                var payload = $"q={Uri.EscapeDataString(TexteAAnalyser)}";
+                string json = await client.RequetePostFormUrlEncodedAsync("/detect", payload);
+
+                // &&&&&&&&&&&&&&&&&&&&&&&&& Test brut pour vérifier le contenu 
+                MessageBox.Show($"Texte envoyé : '{TexteAAnalyser}'", "DEBUG");
+
+                // &&&&&&&&&&&&&&&&&&&&&&&&& Test brut pour vérifier le contenu 
+                MessageBox.Show(json, "JSON brut reçu");
+
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    MessageBox.Show("Aucune réponse de l'API.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (json.Contains("\"error\""))
+                {
+                    var wrapper = JsonConvert.DeserializeObject<ApiErrorWrapper>(json);
+                    MessageBox.Show($"Erreur {wrapper?.Error?.Code} : {wrapper?.Error?.Message}", "Erreur API", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Parser la réponse
+                var wrapperDetection = JsonConvert.DeserializeObject<DetectionFirstWrapper>(json);
+                if (wrapperDetection?.Data?.Detections != null)
+                {
+                    ResultatsDetection = new ObservableCollection<DetectionResult>(wrapperDetection.Data.Detections);
+                    OnPropertyChanged(nameof(ResultatsDetection));
+                    DetectionSelectionnee = ResultatsDetection.FirstOrDefault();
+
+                    // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& --- Test de contenu ---
+                    if (ResultatsDetection.Count == 0)
+                    {
+                        MessageBox.Show("La collection ResultatsDetection est vide !");
+                    }
+                    else
+                    {
+                        var texte = string.Join(Environment.NewLine,
+                            ResultatsDetection.Select(d => $"Langue: {d.Language}, LangueComplete: {d.LangueComplete}, Confiance: {d.Confiance}, Fiable: {d.EstFiable}"));
+                        MessageBox.Show(texte, "Contenu de ResultatsDetection");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }
