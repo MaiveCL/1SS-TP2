@@ -102,11 +102,6 @@ namespace TP2.ViewModels
                 var payload = $"q={Uri.EscapeDataString(TexteAAnalyser)}";
                 string json = await client.RequetePostFormUrlEncodedAsync("/detect", payload);
 
-                // &&&&&&&&&&&&&&&&&&&&&&&&& Test brut pour vérifier le contenu 
-                MessageBox.Show($"Texte envoyé : '{TexteAAnalyser}'", "DEBUG");
-
-                // &&&&&&&&&&&&&&&&&&&&&&&&& Test brut pour vérifier le contenu 
-                MessageBox.Show(json, "JSON brut reçu");
 
                 if (string.IsNullOrWhiteSpace(json))
                 {
@@ -129,16 +124,9 @@ namespace TP2.ViewModels
                     OnPropertyChanged(nameof(ResultatsDetection));
                     DetectionSelectionnee = ResultatsDetection.FirstOrDefault();
 
-                    // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& --- Test de contenu ---
                     if (ResultatsDetection.Count == 0)
                     {
-                        MessageBox.Show("La collection ResultatsDetection est vide !");
-                    }
-                    else
-                    {
-                        var texte = string.Join(Environment.NewLine,
-                            ResultatsDetection.Select(d => $"Langue: {d.Language}, LangueComplete: {d.LangueComplete}, Confiance: {d.Confiance}, Fiable: {d.EstFiable}"));
-                        MessageBox.Show(texte, "Contenu de ResultatsDetection");
+                        MessageBox.Show("Aucun résultat !");
                     }
                 }
 
